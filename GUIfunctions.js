@@ -123,8 +123,8 @@ function registerMouselistener() {
             firstSelected="";
             return false;
           }
-          //TODO: Reimplement history undo function: boardHistory.push(copyArray(myboard));
-          //historyPointer+=1; separate function saveToHistory()
+
+          save();
 
           document.getElementById(fields[firstSelected[0]][firstSelected[1]]).className="";
           document.getElementById("output").innerHTML += " FIGUR" +  //TODO: figur noch anzeigen
@@ -138,13 +138,15 @@ function registerMouselistener() {
           drawBoard();
           
           document.getElementById("lostBlack").innerHTML = getLostFigures(-1);
-          //TODO: setTimeout(function(){ moveBlack(); }, 1000);
-          //TODO: setTimeout(function(){ document.getElementById("calc").className="selected";   }, 100);
+          setTimeout(function(){ moveBlack(); }, 1000);
+          setTimeout(function(){ document.getElementById("calc").className="selected";   }, 100);
         }
       }
     }
   }
 }
+
+
 
 function getFieldCoord(fieldName)
 {

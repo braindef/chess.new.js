@@ -59,12 +59,11 @@ function isInCheck(player) {
 
 }
 
+
 //minmax algorithm that does the game
 function minimax(depth, player, init)
 {
-  var valueArray = [];
-
-  var bestMove = [[0,0],[0,0]];    
+  var bestMove = [[0,0],[0,0]];
 
   if(depth < 1) return evaluateBoard();
 

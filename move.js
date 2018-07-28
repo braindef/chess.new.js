@@ -1,10 +1,26 @@
 
 function moveWhite() {
+  console.log("Starting Move White");
+  var start = new Date().getTime();
+
   move(1);
+
+  var end = new Date().getTime();
+    
+  time = (end-start)/1000;
+  console.log("WHITE FINISHED MOVE in " + time + "s");
 }
 
 function moveBlack() {
+  console.log("Starting Move Black");
+  var start = new Date().getTime();
+
   move(-1);
+
+  var end = new Date().getTime();
+    
+  time = (end-start)/1000;
+  console.log("BLACK FINISHED MOVE in " + time + "s");
 }
 
 
@@ -16,8 +32,7 @@ function move(player) {
   
   if(nextMove[0][0]+nextMove[0][1]+nextMove[1][0]+nextMove[1][1] == 0) alert("CHECKMATE");
   
-  boardHistory.push(board.slice());
-  historyPointer+=1;
+  save();
   //move logging
   document.getElementById("output").innerHTML+= /*getFigure(nextMove) //TODO */ + " " + nextMove[0] + " => " + nextMove[1] + "<br>";
   
@@ -29,7 +44,7 @@ function move(player) {
   
   document.getElementById("f"+nextMove[0][0]+nextMove[0][1]).className="selected";
   document.getElementById("f"+nextMove[1][0]+nextMove[1][1]).className="selected";
-  setTimeout(function(){  resetBoard();  document.getElementById("calc").className=""; }, 2000);
+  setTimeout(function(){  resetBoard();  document.getElementById("calc").className=""; }, 5000);
   var nextMove = minimax(depth, -player, true);
   //var nextMove = alphabeta(depth, player, true, -1000000, 1000000);
     if(nextMove[0][0]+nextMove[0][1]+nextMove[1][0]+nextMove[1][1] == 0) 
@@ -37,4 +52,6 @@ function move(player) {
       alert("CHECKMATE");
     }
     else if(isInCheck(-player)) alert("CHECK");
+    
+
 }
