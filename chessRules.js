@@ -71,7 +71,7 @@ function checkPawn(from, to, player) {
     return true;
 
   //check beating an opponents chess piece diagonal, tests: index.html#♜♞♝♛♚♝♞♜♟♟♟♟♟♟♟_____♟______♟♟_______♙______♙____♙♙♙__♙♙♙♖♘♗♕♔♗♘♖
-  if( ( (from[1]-to[1]==1) || (from[1]-to[1]==-1) ) && player*board[to[0]*8+to[1]]<0)
+  if( to[0]-from[0]==-player && ((from[1]-to[1]==1) || (from[1]-to[1]==-1) ) && player*board[to[0]*8+to[1]]<0)
     return true;
     
   return false;

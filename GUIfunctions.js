@@ -164,3 +164,9 @@ function getLostFigures(player) {
         if(getFigureFromNumber(i, j)==figures[k]) { figures[k]=""; break;}
   return figures.join("");
 }
+
+function resetBoard() {
+  for(var i = 0; i<8; i++)
+    for(var j = 0; j<8; j++)
+      document.getElementById("f"+i+j).className="";
+}

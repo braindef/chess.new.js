@@ -1,0 +1,3 @@
+var historyPointer=0;
+
+
