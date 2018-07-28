@@ -38,6 +38,14 @@ function checking(from, to, player)
     case -5:
       return checkBishop(from, to, -1);
   
+    case 10:
+      return checkRook(from, to, 1);
+      
+    case -10:
+      return checkRook(from, to, -1);
+  
+  
+  
   }
 
   return false;
@@ -76,7 +84,36 @@ function checkKnight(from, to, player) {
 
 
 function checkBishop(from, to, player) {
-  console.log(from+" "+ to+" "+ player);
+
+  var vertical=from[0]-to[0];
+  var horizontal=from[1]-to[1];
+
+  var stepsVertical=Math.abs(vertical);
+  var stepsHorizontal=Math.abs(horizontal)
+
+  var directionVertical=vertical/stepsVertical;
+  var directionHorizontal=horizontal/stepsHorizontal;
+  
+
+
+  //check diagonal if move is not diagonal
+  if( stepsVertical!=stepsHorizontal )
+    return false;
+
+  //check if there is a figure between the start and endpoint
+  for(var i=1; i<stepsVertical; i++)
+    if(board[(from[0]-i*directionVertical)*8+from[1]-i*directionHorizontal]!=0)
+      return false;
+
+  //check if its empty or opponent
+  if(board[to[0]*8+to[1]]*player<=0)
+    return true;
+
+  return false;
+}
+
+function checkRook(from, to, player) {
+
   var vertical=from[0]-to[0];
   var horizontal=from[1]-to[1];
 
@@ -86,18 +123,36 @@ function checkBishop(from, to, player) {
   var directionVertical=vertical/stepsVertical;
   var directionHorizontal=horizontal/stepsHorizontal;
 
-  //check diagonal if move is not diagonal
-  if( stepsVertical!=stepsHorizontal )
+  console.log(stepsVertical + " h: " + stepsHorizontal);
+  console.log((stepsVertical==0));
+  console.log((stepsHorizontal==0));
+  console.log((stepsVertical!=0) && (stepsHorizontal!=0));
+
+  //check if only vertical or only horizontal
+  if ( stepsHorizontal!=0 && stepsVertical!=0 )
+  {
+    console.log("STEPS");
     return false;
+  }
+  
+  if(stepsVertical==0)
+    for(var i=1; i<stepsHorizontal; i++)
+      if(board[from[0]*8+from[1]-i*directionHorizontal]!=0)
+        return false;
 
-  //check if there is a figure between the start and endpoint
-  for(var i=1; i<stepsVertical-1; i++)
-    if(board[(from[0]+directionVertical*i)*8+from[1]+directionHorizontal*i]!=0)
-      return false;
-
+  if(stepsHorizontal==0)
+    for(var i=1; i<stepsVertical; i++)
+      if(board[(from[0]-i*directionVertical)*8+from[1]]!=0)
+        return false;
+        
   //check if its empty or opponent
   if(board[to[0]*8+to[1]]*player<=0)
-    return true;
-
+    return true;        
+    
   return false;
+    
 }
+
+
+
+
