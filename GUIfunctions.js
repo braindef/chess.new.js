@@ -49,7 +49,6 @@ function getBoardFromHTML() {
   for(var i=0; i<8; i++)
     for(var j=0; j<8; j++)
     {
-      console.log(getFigureNumber(i, j));
       board[i*8+j]=getFigureNumber(i, j);
     }
 }
@@ -100,4 +99,68 @@ function getFigureFromNumber(i, j) {
     
     return "";
   }
+}
+
+var firstSelected = "";
+var secondSelected  = "";
+
+//register mouselistener to fields on board
+function registerMouselistener() {
+  for (var i = 0; i<8; i++) {
+    for (var j = 0; j<8; j++) {
+      document.getElementById(fields[i][j]).onclick = function( event ) {
+        getBoardFromHTML();
+        if (firstSelected=="") {
+          if (document.getElementById(event.target.id).innerHTML=="") return;  //TODO: take data from array
+          document.getElementById(event.target.id).className="selected";
+          firstSelected=getFieldCoord(event.target.id);
+        }
+        else {
+          secondSelected=getFieldCoord(event.target.id);
+          if(checking(firstSelected, secondSelected, 1)==false)
+          {
+            document.getElementById(fields[firstSelected[0]][firstSelected[1]]).className="";
+            firstSelected="";
+            return false;
+          }
+          //TODO: Reimplement history undo function: boardHistory.push(copyArray(myboard));
+          //historyPointer+=1; separate function saveToHistory()
+
+          document.getElementById(fields[firstSelected[0]][firstSelected[1]]).className="";
+          document.getElementById("output").innerHTML += " FIGUR" +  //TODO: figur noch anzeigen
+                                                         " " +firstSelected +" => " + getFieldCoord(event.target.id)+"<br>";
+                                                        
+          board[secondSelected[0]*8+secondSelected[1]]=board[firstSelected[0]*8+firstSelected[1]];
+          board[firstSelected[0]*8+firstSelected[1]]=0;
+          
+          firstSelected="";
+          secondSelected="";
+          drawBoard();
+          
+          document.getElementById("lostBlack").innerHTML = getLostFigures(-1);
+          //TODO: setTimeout(function(){ moveBlack(); }, 1000);
+          //TODO: setTimeout(function(){ document.getElementById("calc").className="selected";   }, 100);
+        }
+      }
+    }
+  }
+}
+
+function getFieldCoord(fieldName)
+{
+  for(var i=0; i<8; i++)
+    for(var j=0; j<8; j++)
+      if(fields[i][j] == fieldName)
+       return [i, j];
+}
+
+function getLostFigures(player) {
+  if(player==1) figures = ["♕", "♔", "♗", "♗", "♘","♘", "♖", "♖", "♙", "♙", "♙", "♙", "♙", "♙", "♙", "♙"];
+  if(player==-1) figures = ["♛", "♚", "♝", "♝", "♞", "♞", "♜", "♜", "♟", "♟", "♟", "♟", "♟", "♟", "♟", "♟"];
+
+  for(var i = 0; i<8; i++)
+    for(var j = 0; j<8; j++)
+      for(var k = 0; k<16; k++)
+        if(getFigureFromNumber(i, j)==figures[k]) { figures[k]=""; break;}
+  return figures.join("");
 }
