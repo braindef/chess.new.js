@@ -1,0 +1,29 @@
+
+div {
+  text-align: center;
+  vertical-align: middle;
+
+}
+
+button, input {
+  width:50;
+  height:50;
+  border: none;
+  
+  text-align: center;
+  text-decoration: none;
+  font-size:33;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
+  vertical-align: middle;
+}
+
+.selected {
+  animation: blinker 0.5s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
