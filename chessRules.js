@@ -43,16 +43,24 @@ function checking(from, to, player)
       
     case -10:
       return checkRook(from, to, -1);
-  
-  
-  
+
+    case 30:
+      return checkQueen(from, to, 1);
+      
+    case -30:
+      return checkQueen(from, to, -1);
+
+    case 100:
+      return checkKing(from, to, 1);
+      
+    case -100:
+      return checkKing(from, to, -1);
   }
 
   return false;
 }
 
 function checkPawn(from, to, player) {
-  console.log("checkPawn(): FROM: "+from+" TO: "+to+" Player: "+player);
 
   //check single move
   if(from[1]==to[1] && ((to[0]-from[0])==-player) && board[to[0]*8+to[1]]==0)
@@ -123,15 +131,10 @@ function checkRook(from, to, player) {
   var directionVertical=vertical/stepsVertical;
   var directionHorizontal=horizontal/stepsHorizontal;
 
-  console.log(stepsVertical + " h: " + stepsHorizontal);
-  console.log((stepsVertical==0));
-  console.log((stepsHorizontal==0));
-  console.log((stepsVertical!=0) && (stepsHorizontal!=0));
 
   //check if only vertical or only horizontal
   if ( stepsHorizontal!=0 && stepsVertical!=0 )
   {
-    console.log("STEPS");
     return false;
   }
   
@@ -152,6 +155,34 @@ function checkRook(from, to, player) {
   return false;
     
 }
+
+function checkQueen(from, to, player) {
+
+  //reuse the tests from Bishop and Rook  
+  return checkBishop(from, to, player) || checkRook(from, to, player);
+  
+  return false;
+
+}
+
+function checkKing(from, to, player) {
+
+  var vertical=from[0]-to[0];
+  var horizontal=from[1]-to[1];
+  
+  var stepsVertical=Math.abs(vertical);
+  var stepsHorizontal=Math.abs(horizontal)
+  
+  if( ( stepsVertical==1 && stepsHorizontal==1 || 
+        stepsVertical==0 && stepsHorizontal==1 ||
+        stepsVertical==1 && stepsHorizontal==0    ) && board[to[0]*8+to[1]]*player<=0 )
+    return true;
+    
+  return false;
+}
+
+
+
 
 
 
