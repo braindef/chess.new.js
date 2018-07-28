@@ -10,7 +10,6 @@ var player = new Int8Array(1);
 
 function checking(from, to, player)
 {
-  console.log("FROM: "+from+" TO: "+to+" Player: "+player);
   //check if player wants to move his own figures
   if(player*board[from[0]*8+from[1]]<0)
     return false;
@@ -27,6 +26,18 @@ function checking(from, to, player)
     case -1:
       return checkPawn(from, to, -1);
   
+    case 7:
+      return checkKnight(from, to, 1);
+      
+    case -7:
+      return checkKnight(from, to, -1);
+  
+    case 5:
+      return checkBishop(from, to, 1);
+      
+    case -5:
+      return checkBishop(from, to, -1);
+  
   }
 
   return false;
@@ -42,10 +53,51 @@ function checkPawn(from, to, player) {
   //check 2 field move (first move), tests: index.html#♜♞♝♛♚♝♞♜♟♟__♟_♟♟__________________♟♙________♙♟__♙♙♙♙♙♙♙♙♖♘♗♕♔♗♘♖
   if(from[1]==to[1] && ((to[0]-from[0])==-player*2) && board[to[0]*8+to[1]]==0 && board[(to[0]+player)*8+to[1]]==0)
     return true;
+
+  //check beating an opponents chess piece diagonal, tests: index.html#♜♞♝♛♚♝♞♜♟♟♟♟♟♟♟_____♟______♟♟_______♙______♙____♙♙♙__♙♙♙♖♘♗♕♔♗♘♖
+  if( ( (from[1]-to[1]==1) || (from[1]-to[1]==-1) ) && player*board[to[0]*8+to[1]]<0)
+    return true;
     
+  return false;
+}
+
+function checkKnight(from, to, player) {
+
+  //check 1 to the side and 2 up or down
+  if(Math.abs(from[1]-to[1])==1 && Math.abs(from[0]-to[0])==2 && board[to[0]*8+to[1]]*player<=0)
+    return true;
     
+  //check 2 to the side and 1 up or down
+  if(Math.abs(from[1]-to[1])==2 && Math.abs(from[0]-to[0])==1 && board[to[0]*8+to[1]]*player<=0)
+    return true;
     
   return false;
 }
 
 
+function checkBishop(from, to, player) {
+  console.log(from+" "+ to+" "+ player);
+  var vertical=from[0]-to[0];
+  var horizontal=from[1]-to[1];
+
+  var stepsVertical=Math.abs(vertical);
+  var stepsHorizontal=Math.abs(horizontal)
+
+  var directionVertical=vertical/stepsVertical;
+  var directionHorizontal=horizontal/stepsHorizontal;
+
+  //check diagonal if move is not diagonal
+  if( stepsVertical!=stepsHorizontal )
+    return false;
+
+  //check if there is a figure between the start and endpoint
+  for(var i=1; i<stepsVertical-1; i++)
+    if(board[(from[0]+directionVertical*i)*8+from[1]+directionHorizontal*i]!=0)
+      return false;
+
+  //check if its empty or opponent
+  if(board[to[0]*8+to[1]]*player<=0)
+    return true;
+
+  return false;
+}
