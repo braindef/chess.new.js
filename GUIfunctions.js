@@ -1,4 +1,6 @@
 
+
+
 //fields in html code
 fields = [["f00", "f01", "f02", "f03", "f04", "f05", "f06","f07"],
           ["f10", "f11", "f12", "f13", "f14", "f15", "f16","f17"],
@@ -145,8 +147,9 @@ function registerMouselistener() {
             return false;
           }
 
+          if(isInCheck(1))
+            return false;
           save();
-
 
           document.getElementById("output").innerHTML+= getFigureFromNumber(firstSelected[0],firstSelected[1]) + " " + 
                                                         getVerticalLetter(firstSelected[0]) + getHorizontalNumber(firstSelected[1]) + " => " +
@@ -154,6 +157,12 @@ function registerMouselistener() {
                                                         
           board[secondSelected[0]*8+secondSelected[1]]=board[firstSelected[0]*8+firstSelected[1]];
           board[firstSelected[0]*8+firstSelected[1]]=0;
+
+          if(isInCheck(1))
+          {
+            return false;
+          }
+
           
           firstSelected="";
           secondSelected="";
@@ -162,7 +171,7 @@ function registerMouselistener() {
           document.getElementById("lostBlack").innerHTML = getLostFigures(-1);
           setTimeout(function(){ moveBlack(); }, 1000);
           setTimeout(function(){ document.getElementById("black").className="selected";   }, 100);
-          setTimeout(function(){  resetBoard();  document.getElementById("white").className=""; }, 100);
+          setTimeout(function(){ resetBoard();  document.getElementById("white").className=""; }, 100);
         }
       }
     }

@@ -12,7 +12,8 @@
     <script src="./chessRules.js" charset="UTF-8"></script>
     <script src="./parallel.js" charset="UTF-8"></script>
 
-<!--    <script src="./modal.js" charset="UTF-8"></script>
+    <script src="./modal.js" charset="UTF-8"></script>
+<!--    
     <script src="./alphabeta.js" charset="UTF-8"></script>-->
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/modal.css">
@@ -22,10 +23,10 @@
 
 <div>
 <!--<h1>Schach mit Mini-Max Algorithmus<br> (bzw. Alpha-Beta Algorithmus)<br></h1>-->
-<button style='width:300;'>Recursions:</button><input  id="depth" style='width:100;background-color:lightblue' value="4" ></input><br>
+<button style='width:300;'>Recursions:</button><input  id="depth" style='width:100;background-color:lightblue' value="3" ></input><br>
 <button style='width:250;'>calcul. Moves:</button><input id="instances" style='width:150;background-color:tomato' readonly></input><br><br>
 
-<button id="lostWhite" class="legend" style='width:400;'></button><br>
+<button id="lostWhite" class="lost" style='width:400;'></button><br>
 <button class="legend"></button><button class="legend">1</button><button class="legend">2</button><button class="legend">3</button><button class="legend">4</button><button class="legend">5</button><button class="legend">6</button><button class="legend">7</button><button class="legend">8</button><button class="legend"></button><br>
 <button class="legend">A</button><button id=f00>♜</button><button id=f01>♞</button><button id=f02>♝</button><button id=f03>♛</button><button id=f04>♚</button><button id=f05>♝</button><button id=f06>♞</button><button id=f07>♜</button><button class="legend">A</button><br>
 <button class="legend">B</button><button id=f10>♟</button><button id=f11>♟</button><button id=f12>♟</button><button id=f13>♟</button><button id=f14>♟</button><button id=f15>♟</button><button id=f16>♟</button><button id=f17>♟</button><button class="legend">B</button><br>
@@ -36,13 +37,12 @@
 <button class="legend">G</button><button id=f60>♙</button><button id=f61>♙</button><button id=f62>♙</button><button id=f63>♙</button><button id=f64>♙</button><button id=f65>♙</button><button id=f66>♙</button><button id=f67>♙</button><button class="legend">G</button><br>
 <button class="legend">H</button><button id=f70>♖</button><button id=f71>♘</button><button id=f72>♗</button><button id=f73>♕</button><button id=f74>♔</button><button id=f75>♗</button><button id=f76>♘</button><button id=f77>♖</button><button class="legend">H</button><br>
 <button class="legend"></button><button class="legend">1</button><button class="legend">2</button><button class="legend">3</button><button class="legend">4</button><button class="legend">5</button><button class="legend">6</button><button class="legend">7</button><button class="legend">8</button><button class="legend"></button><br>
-<button id="lostBlack" class="legend" style='width:400;'></button><br><br>
+<button id="lostBlack" class="lost" style='width:400;'></button><br><br>
 <div>
 
 
 <!-- The Modal Dialogbox selecting pawn replacement -->
 <div id="select" class="modal">
-
   <div class="modalContent">
     <span class="close">&times;</span>
     <p>Select the Figure for the Pawn the just arrived the other side of the Board</p>
@@ -58,7 +58,16 @@
   <!-- Modal content -->
   <div class="modalContent">
     <span class="close">&times;</span>
-    <p>Checkmate</p>
+    <p>CHECKMATE</p>
+  </div>
+</div>
+
+<!-- The Modal Dialogbox for checkmate -->
+<div id="check" class="modal">
+  <!-- Modal content -->
+  <div class="modalContent">
+    <span class="close">&times;</span>
+    <p>Check</p>
   </div>
 </div>
 

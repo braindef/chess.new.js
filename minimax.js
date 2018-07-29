@@ -1,3 +1,7 @@
+//constants
+FROM = 0; TO = 1; X = 0; Y = 1;
+
+
 //white = maximizing  // black = minimizing
 function evaluateBoard() {
   var points=0;
@@ -49,10 +53,10 @@ function possibleMoves(player)
 
 //TODO: braucht viel ressourcen wenn das bei jedem Zug aufgerufen wird => wird nur in der obersten instanz aufgerufen
 function isInCheck(player) {
-  moves = possibleMoves(player);
+  moves = possibleMoves(-player);
   
   for(var i=0; i<moves.length; i++)
-    if(board[moves[i][0]*8+moves[i][1]]==100*player)
+    if(board[moves[i][1][0]*8+moves[i][1][1]]==100*player)
       return true;
       
   return false;
@@ -76,9 +80,6 @@ function minimax(depth, player, init)
   var bestValue=-1000000*player;
   for(var i = 0; i < moves.length; i++)
   {
-    FROM = 0; TO = 1; X = 0; Y = 1;
-
-
 
     //Make the move
     var rollback = board[moves[i][TO][X]*8+moves[i][TO][Y]];
@@ -90,7 +91,7 @@ function minimax(depth, player, init)
       if(isInCheck(player))
       {
         //Revert the move
-        board[moves[i][FROM][X]*8+moves[i][FROM][Y]] = myboard[moves[i][TO][X]*8+moves[i][TO][Y]];
+        board[moves[i][FROM][X]*8+moves[i][FROM][Y]] = board[moves[i][TO][X]*8+moves[i][TO][Y]];
         board[moves[i][TO][X]*8+moves[i][TO][Y]] = rollback;
         continue;    
       }

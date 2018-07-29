@@ -20,7 +20,12 @@ button, input {
 
 button.legend {
   background-color: white;
-  font-size:30;
+  font-size:20;
+}
+
+button.lost {
+  background-color: white;
+  font-size:33;
 }
 
 .selected {

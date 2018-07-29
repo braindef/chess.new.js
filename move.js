@@ -2,6 +2,7 @@
 var start=0;
 var end=0;
 
+
 function moveWhite() {
   start = new Date().getTime();
   move(1);
@@ -9,6 +10,7 @@ function moveWhite() {
   time = (end-start)/1000;
   document.getElementById("white").innerHTML="turn White ("+time+"s)";
 }
+
 
 function moveBlack() {
   start = new Date().getTime();
@@ -39,18 +41,22 @@ function move(player) {
   
   document.getElementById("f"+nextMove[0][0]+nextMove[0][1]).className="selected";
   document.getElementById("f"+nextMove[1][0]+nextMove[1][1]).className="selected";
-  setTimeout(function(){  resetBoard();  document.getElementById("white").className=""; }, 100);
-  setTimeout(function(){  resetBoard();  document.getElementById("black").className=""; }, 100);
+  console.log("f"+nextMove[0][0]+nextMove[0][1]);
+  setTimeout(function(){ document.getElementById("white").className=""; }, 100);
+  setTimeout(function(){ document.getElementById("black").className=""; }, 100);
   if(player==1) setTimeout(function(){ document.getElementById("black").className="selected";   }, 1000);
   else setTimeout(function(){ document.getElementById("white").className="selected";   }, 1000);
 
-  var nextMove = minimax(depth, -player, true);
+
+
+  var nextMove = minimax(1, -player, true);
   //var nextMove = alphabeta(depth, player, true, -1000000, 1000000);
     if(nextMove[0][0]+nextMove[0][1]+nextMove[1][0]+nextMove[1][1] == 0) 
     {
-      alert("CHECKMATE");
+      openModal("checkmate");
     }
-    else if(isInCheck(-player)) alert("CHECK");
-    
+    else if(isInCheck(-player)) openModal("check");
+
+  setTimeout(function(){  resetBoard(); }, 5000);
 
 }
