@@ -161,6 +161,7 @@ function registerMouselistener() {
           {
             getBoardFromHTML();
             resetBoard();
+            openModal("illegal");
             return false;
           }
 

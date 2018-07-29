@@ -47,6 +47,7 @@ window.onkeyup = function(e) {
   if (key == 27) {
     closeModal("checkmate");
     closeModal("check");
+    closeModal("illegal");
     closeModal("select");
   }
 }

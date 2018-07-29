@@ -27,7 +27,7 @@ function move(player) {
   var nextMove = minimax(depth, player, true);
   //nextMove = alphabeta(depth, player, true, -1000000, 1000000);
   
-  if(nextMove[0][0]+nextMove[0][1]+nextMove[1][0]+nextMove[1][1] == 0) alert("CHECKMATE");
+  if(nextMove[0][0]+nextMove[0][1]+nextMove[1][0]+nextMove[1][1] == 0) openModal("win");
   
   save();
   //move logging
