@@ -68,8 +68,8 @@ function checkPawn(from, to, player) {
   
   var home=0;
   
-  if(player==1) home=6;
-  if(player==-1) home=1;
+  if(player==1) { home=6; traverse = 0; }
+  if(player==-1) { home=1; traverse = 7; }
 
   
   //check 2 field move (first move), tests: index.html#♜♞♝♛♚♝♞♜♟♟__♟_♟♟__________________♟♙________♙♟__♙♙♙♙♙♙♙♙♖♘♗♕♔♗♘♖
@@ -83,6 +83,7 @@ function checkPawn(from, to, player) {
   //check beating an opponents chess piece diagonal, tests: index.html#♜♞♝♛♚♝♞♜♟♟♟♟♟♟♟_____♟______♟♟_______♙______♙____♙♙♙__♙♙♙♖♘♗♕♔♗♘♖
   if(deltaHorizontal==1 && deltaVertical*player==-1 && player*target<0)
     return true;
+
     
   return false;
 }

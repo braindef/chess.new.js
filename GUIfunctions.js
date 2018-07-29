@@ -153,7 +153,8 @@ function registerMouselistener() {
           document.getElementById("output").innerHTML+= getFigureFromNumber(firstSelected[0],firstSelected[1]) + " " + 
                                                         getVerticalLetter(firstSelected[0]) + getHorizontalNumber(firstSelected[1]) + " => " +
                                                         getVerticalLetter(secondSelected[0]) + getHorizontalNumber(secondSelected[1]) + "<br>";
-                                                        
+
+          //TODO: replace with commitMove(FROM, TO, MANUAL=true):returns savedata
           board[secondSelected[0]*8+secondSelected[1]]=board[firstSelected[0]*8+firstSelected[1]];
           board[firstSelected[0]*8+firstSelected[1]]=0;
 

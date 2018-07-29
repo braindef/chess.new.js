@@ -81,7 +81,7 @@ function minimax(depth, player, init, resetCounter)
   for(var i = 0; i < moves.length; i++)
   {
 
-    //Make the move
+    //Make the move  TODO: replace with commitMove(FROM, TO, MANUAL):returns savedata
     var rollback = board[moves[i][TO][X]*8+moves[i][TO][Y]];
     board[moves[i][TO][X]*8+moves[i][TO][Y]] = board[moves[i][FROM][X]*8+moves[i][FROM][Y]];
     board[moves[i][FROM][X]*8+moves[i][FROM][Y]] = "";
@@ -90,7 +90,7 @@ function minimax(depth, player, init, resetCounter)
     {
       if(isInCheck(player))
       {
-        //Revert the move
+        //Revert the move: replace with revertMove(savedata)
         board[moves[i][FROM][X]*8+moves[i][FROM][Y]] = board[moves[i][TO][X]*8+moves[i][TO][Y]];
         board[moves[i][TO][X]*8+moves[i][TO][Y]] = rollback;
         continue;    
@@ -114,7 +114,7 @@ function minimax(depth, player, init, resetCounter)
       bestMove = moves[i];
     }
 
-    //Revert the move
+    //Revert the move replace with commitMove(FROM, TO, MANUAL):returns savedata
     board[moves[i][FROM][X]*8+moves[i][FROM][Y]] = board[moves[i][TO][X]*8+moves[i][TO][Y]];
     board[moves[i][TO][X]*8+moves[i][TO][Y]] = rollback;
   }
