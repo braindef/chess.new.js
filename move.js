@@ -56,6 +56,7 @@ function move(player) {
       openModal("checkmate");
     }
     else if(isInCheck(-player)) openModal("check");
+    console.log(nextMove);
 
   setTimeout(function(){  resetBoard(); }, 5000);
 

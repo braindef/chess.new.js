@@ -147,8 +147,7 @@ function registerMouselistener() {
             return false;
           }
 
-          if(isInCheck(1))
-            return false;
+
           save();
 
           document.getElementById("output").innerHTML+= getFigureFromNumber(firstSelected[0],firstSelected[1]) + " " + 
@@ -160,6 +159,8 @@ function registerMouselistener() {
 
           if(isInCheck(1))
           {
+            getBoardFromHTML();
+            resetBoard();
             return false;
           }
 
@@ -200,6 +201,8 @@ function getLostFigures(player) {
 }
 
 function resetBoard() {
+  firstSelected = "";
+  secondSelected  = "";
   for(var i = 0; i<8; i++)
     for(var j = 0; j<8; j++)
       document.getElementById("f"+i+j).className="";
