@@ -3,29 +3,19 @@ var start=0;
 var end=0;
 
 function moveWhite() {
-  console.log("Starting Move White");
   start = new Date().getTime();
-
   move(1);
-
   end = new Date().getTime();
-    
   time = (end-start)/1000;
-  //console.log("WHITE FINISHED MOVE in " + time + "s");
-  document.getElementById("white").innerHTML="turn White "+time+"s";
+  document.getElementById("white").innerHTML="turn White ("+time+"s)";
 }
 
 function moveBlack() {
-  console.log("Starting Move Black");
   start = new Date().getTime();
-
   move(-1);
-
   end = new Date().getTime();
-    
   time = (end-start)/1000;
-  //console.log("BLACK FINISHED MOVE in " + time + "s");
-  document.getElementById("black").innerHTML="turn Black "+time+"s";
+  document.getElementById("black").innerHTML="turn Black ("+parseInt(time)+"s)";
 }
 
 
