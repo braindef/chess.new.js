@@ -66,9 +66,9 @@ function isInCheck(player) {
 var instances=0;
 
 //minmax algorithm that does the game
-function minimax(depth, player, init)
+function minimax(depth, player, init, resetCounter)
 {
-  if(init) instances=0;
+  if(resetCounter) instances=0;
   else instances+=1;
   
   var bestMove = [[0,0],[0,0]];

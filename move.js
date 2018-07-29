@@ -24,7 +24,7 @@ function moveBlack() {
 
 function move(player) {
   var depth = parseInt(document.getElementById("depth").value);
-  var nextMove = minimax(depth, player, true);
+  var nextMove = minimax(depth, player, true, false);
   //nextMove = alphabeta(depth, player, true, -1000000, 1000000);
   
   if(nextMove[0][0]+nextMove[0][1]+nextMove[1][0]+nextMove[1][1] == 0) openModal("win");
@@ -49,7 +49,7 @@ function move(player) {
 
 
 
-  var nextMove = minimax(1, -player, true);
+  var nextMove = minimax(1, -player, true, false);
   //var nextMove = alphabeta(depth, player, true, -1000000, 1000000);
     if(nextMove[0][0]+nextMove[0][1]+nextMove[1][0]+nextMove[1][1] == 0) 
     {
