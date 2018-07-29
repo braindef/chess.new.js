@@ -101,6 +101,23 @@ function getFigureFromNumber(i, j) {
   }
 }
 
+function getVerticalLetter(number) {
+  switch (number) {
+    case 0: return "A";
+    case 1: return "B";
+    case 2: return "C";
+    case 3: return "D";
+    case 4: return "E";
+    case 5: return "F";
+    case 6: return "G";
+    case 7: return "H";
+  }
+}
+
+function getHorizontalNumber(number) {
+  return number + 1;
+}
+
 function getFigure(nextMove) {
   return getFigureFromNumber(nextMove[0][0], nextMove[0][1]);
 } 
@@ -130,9 +147,10 @@ function registerMouselistener() {
 
           save();
 
-          document.getElementById(fields[firstSelected[0]][firstSelected[1]]).className="";
-          document.getElementById("output").innerHTML+= getFigureFromNumber(firstSelected[0],firstSelected[1]) + 
-                                                        " " +firstSelected + " => " + getFieldCoord(event.target.id) + "<br>";
+
+          document.getElementById("output").innerHTML+= getFigureFromNumber(firstSelected[0],firstSelected[1]) + " " + 
+                                                        getVerticalLetter(firstSelected[0]) + getHorizontalNumber(firstSelected[1]) + " => " +
+                                                        getVerticalLetter(secondSelected[0]) + getHorizontalNumber(secondSelected[1]) + "<br>";
                                                         
           board[secondSelected[0]*8+secondSelected[1]]=board[firstSelected[0]*8+firstSelected[1]];
           board[firstSelected[0]*8+firstSelected[1]]=0;
