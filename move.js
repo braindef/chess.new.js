@@ -41,7 +41,7 @@ function move(player) {
   
   document.getElementById("f"+nextMove[0][0]+nextMove[0][1]).className="selected";
   document.getElementById("f"+nextMove[1][0]+nextMove[1][1]).className="selected";
-  console.log("f"+nextMove[0][0]+nextMove[0][1]);
+  //console.log("f"+nextMove[0][0]+nextMove[0][1]);
   setTimeout(function(){ document.getElementById("white").className=""; }, 100);
   setTimeout(function(){ document.getElementById("black").className=""; }, 100);
   if(player==1) setTimeout(function(){ document.getElementById("black").className="selected";   }, 1000);
@@ -56,7 +56,7 @@ function move(player) {
       openModal("checkmate");
     }
     else if(isInCheck(-player)) openModal("check");
-    console.log(nextMove);
+    //console.log(nextMove);
 
   setTimeout(function(){  resetBoard(); }, 5000);
 

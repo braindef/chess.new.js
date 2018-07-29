@@ -30,10 +30,10 @@ function drawBoardToConsole()
   {
     for(var j = 0; j<8; j++)
     {
-      if(board[i][j]=="")
+      if(board[i*8+j]==0)
         line+= " _ ";
       else
-        line+= " "+board[i][j]+" ";
+        line+= " "+board[i*8+j]+" ";
     }
     console.log(line);
     line="";

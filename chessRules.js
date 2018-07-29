@@ -21,40 +21,40 @@ function checking(from, to, player)
   switch (board[from[0]*8+from[1]]) {
   
     case 1:
-      return checkPawn(from, to, 1);
+      return checkPawn(from, to, player);
       
     case -1:
-      return checkPawn(from, to, -1);
+      return checkPawn(from, to, player);
   
     case 7:
-      return checkKnight(from, to, 1);
+      return checkKnight(from, to, player);
       
     case -7:
-      return checkKnight(from, to, -1);
+      return checkKnight(from, to, player);
   
     case 5:
-      return checkBishop(from, to, 1);
+      return checkBishop(from, to, player);
       
     case -5:
-      return checkBishop(from, to, -1);
+      return checkBishop(from, to, player);
   
     case 10:
-      return checkRook(from, to, 1);
+      return checkRook(from, to, player);
       
     case -10:
-      return checkRook(from, to, -1);
+      return checkRook(from, to, player);
 
     case 30:
-      return checkQueen(from, to, 1);
+      return checkQueen(from, to, player);
       
     case -30:
-      return checkQueen(from, to, -1);
+      return checkQueen(from, to, player);
 
     case 100:
-      return checkKing(from, to, 1);
+      return checkKing(from, to, player);
       
     case -100:
-      return checkKing(from, to, -1);
+      return checkKing(from, to, player);
   }
 
   return false;
@@ -68,15 +68,20 @@ function checkPawn(from, to, player) {
   
   var home=0;
   
-  if(player=1) home=6;
-  if(player=-1) home=1;
+  if(player==1) home=6;
+  if(player==-1) home=1;
+
   
   //check 2 field move (first move), tests: index.html#♜♞♝♛♚♝♞♜♟♟__♟_♟♟__________________♟♙________♙♟__♙♙♙♙♙♙♙♙♖♘♗♕♔♗♘♖
   if(from[1]==to[1] && from[0]==home && ((to[0]-from[0])==-player*2) && board[to[0]*8+to[1]]==0 && board[(to[0]+player)*8+to[1]]==0)
     return true;
 
+  var deltaVertical=to[0]-from[0];
+  var deltaHorizontal=Math.abs(to[1]-from[1]);
+  var target = board[to[0]*8+to[1]];
+
   //check beating an opponents chess piece diagonal, tests: index.html#♜♞♝♛♚♝♞♜♟♟♟♟♟♟♟_____♟______♟♟_______♙______♙____♙♙♙__♙♙♙♖♘♗♕♔♗♘♖
-  if( to[0]-from[0]==-player && ((from[1]-to[1]==1) || (from[1]-to[1]==-1) ) && player*board[to[0]*8+to[1]]<0)
+  if(deltaHorizontal==1 && deltaVertical*player==-1 && player*target<0)
     return true;
     
   return false;
