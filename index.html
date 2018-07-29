@@ -85,7 +85,7 @@
   <!-- Modal content -->
   <div class="modalContent">
     <span class="close">&times;</span>
-    <p>You WON against the Computer (<a href="https://en.wikipedia.org/wiki/Minimax">Minimax Algorithm)</a></p>
+    <p>You WON against the Computer (<a href="https://en.wikipedia.org/wiki/Minimax">Minimax Algorithm</a>)</p>
   </div>
 </div>
 
@@ -93,9 +93,10 @@
 
 <button id="white" onclick='moveWhite()' style='width:400; background-color: #E8E8E8;'>turn White</button><br>
 <button id="black" onclick='moveBlack()' style='width:400; background-color: #303030; color:white'>turn Black</button><br>
+<button onclick='revert(1)' style="width:400; background-color: tomato">undo</button><br>
 <button onclick='exportToURL()' style='width:400; background-color: yellow;'>export to URL</button><br>
 <button onclick='importFromURL()' style="width:400; background-color: lightgreen">import from URL</button><br>
-<button onclick='revert(1)' style="width:400; background-color: red">undo</button><br>
+
     <br>
     <p id="output"></br></br>
     </p>
