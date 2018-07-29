@@ -22,7 +22,8 @@
 
 <div>
 <h1>Schach mit Mini-Max Algorithmus<br> (bzw. Alpha-Beta Algorithmus)<br></h1> 
-<button style='width:300;'>Recursions:</button><input  id="depth" style='width:100;background-color:lightblue'value="3" ></input><br><br>
+<button style='width:300;'>Recursions:</button><input  id="depth" style='width:100;background-color:lightblue' value="4" ></input><br>
+<button style='width:250;'>calcul. Moves:</button><input id="instances" style='width:150;background-color:tomato' readonly></input><br><br>
 
 <button id="lostWhite" class="lost" style='width:400; background-color: 	#E8E8E8;'></button><br>
 <button id=f00>♜</button><button id=f01>♞</button><button id=f02>♝</button><button id=f03>♛</button><button id=f04>♚</button><button id=f05>♝</button><button id=f06>♞</button><button id=f07>♜</button><br>
@@ -61,8 +62,8 @@
 
 
 <button id="lostBlack" class="lost" style='width:400; background-color: #E8E8E8;'></button><br><br>
-<button onclick='moveWhite()' style='width:400; background-color: 	#E8E8E8;'>move White</button><br>
-<button id="calc" onclick='moveBlack()' style='width:400; background-color: #303030; color:white'>move Black</button><br>
+<button id="white" onclick='moveWhite()' style='width:400; background-color: #E8E8E8;'>turn White</button><br>
+<button id="black" onclick='moveBlack()' style='width:400; background-color: #303030; color:white'>turn Black</button><br>
 <button onclick='exportToURL()' style='width:400; background-color: yellow;'>export to URL</button><br>
 <button onclick='importFromURL()' style="width:400; background-color: lightgreen">import from URL</button><br>
 <button onclick='revert(1)' style="width:400; background-color: red">undo</button><br>

@@ -101,6 +101,10 @@ function getFigureFromNumber(i, j) {
   }
 }
 
+function getFigure(nextMove) {
+  return getFigureFromNumber(nextMove[0][0], nextMove[0][1]);
+} 
+
 var firstSelected = "";
 var secondSelected  = "";
 
@@ -127,8 +131,8 @@ function registerMouselistener() {
           save();
 
           document.getElementById(fields[firstSelected[0]][firstSelected[1]]).className="";
-          document.getElementById("output").innerHTML += " FIGUR" +  //TODO: figur noch anzeigen
-                                                         " " +firstSelected +" => " + getFieldCoord(event.target.id)+"<br>";
+          document.getElementById("output").innerHTML+= getFigureFromNumber(firstSelected[0],firstSelected[1]) + 
+                                                        " " +firstSelected + " => " + getFieldCoord(event.target.id) + "<br>";
                                                         
           board[secondSelected[0]*8+secondSelected[1]]=board[firstSelected[0]*8+firstSelected[1]];
           board[firstSelected[0]*8+firstSelected[1]]=0;
@@ -139,7 +143,8 @@ function registerMouselistener() {
           
           document.getElementById("lostBlack").innerHTML = getLostFigures(-1);
           setTimeout(function(){ moveBlack(); }, 1000);
-          setTimeout(function(){ document.getElementById("calc").className="selected";   }, 100);
+          setTimeout(function(){ document.getElementById("black").className="selected";   }, 100);
+          setTimeout(function(){  resetBoard();  document.getElementById("white").className=""; }, 100);
         }
       }
     }

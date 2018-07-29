@@ -59,10 +59,14 @@ function isInCheck(player) {
 
 }
 
+var instances=0;
 
 //minmax algorithm that does the game
 function minimax(depth, player, init)
 {
+  if(init) instances=0;
+  else instances+=1;
+  
   var bestMove = [[0,0],[0,0]];
 
   if(depth < 1) return evaluateBoard();
@@ -115,7 +119,11 @@ function minimax(depth, player, init)
   }
 
   //we return the points except the first move we return the move to play    
-  if (init) return bestMove;
+  if (init)
+  {
+    document.getElementById("instances").value=instances;
+    return bestMove;
+  }
   else return bestValue;
 
 }
