@@ -35,6 +35,7 @@ function move(player) {
   
   board[nextMove[1][0]*8+nextMove[1][1]]=board[nextMove[0][0]*8+nextMove[0][1]];
   board[nextMove[0][0]*8+nextMove[0][1]]=""
+  postMoveProcessing(nextMove, player);
    
   drawBoard();
   document.getElementById("lostWhite").innerHTML = getLostFigures(1);

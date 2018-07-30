@@ -243,8 +243,7 @@ function makeCastlingMove(move, player) {
     move2=[[7,7],[7,5]];
     board[move2[1][0]*8+move2[1][1]]=board[move2[0][0]*8+move2[0][1]];
     board[move2[0][0]*8+move2[0][1]]=0;
-    console.log("RETURN WHITE ROOK old POS");
-    return [ move2, board[move2[1][0]*8+move2[1][1]] ];
+    return [ move2, 0 ];
   }
 
   if(move[FROM][0]==0 && move[FROM][1]==4 && move[TO][0]==0 && move[TO][1]==6)
@@ -253,10 +252,8 @@ function makeCastlingMove(move, player) {
     move2=[[0,7],[0,5]];
     board[move2[1][0]*8+move2[1][1]]=board[move2[0][0]*8+move2[0][1]];
     board[move2[0][0]*8+move2[0][1]]=0;
-    
-    console.log([ move2, board[move2[1][0]*8+move2[1][1]] ]);
-    console.log("RETURN BLACK ROOK old POS");
-    return [ move2, board[move2[1][0]*8+move2[1][1]] ];
+
+    return [ move2, 0 ];
   }
 }
 
