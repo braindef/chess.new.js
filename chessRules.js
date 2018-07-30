@@ -236,32 +236,57 @@ function postMoveProcessing(move, player)
   makeCastlingMove(move, player);
 }
 
+
+function castlingMovePossible(move, player) {
+  if(move[1][0]==7&&move[1][1]==6)   //Check small Castling (rochade) move white
+    if(board[move[0][0]*8+move[0][1]]==whiteKing)
+      if(board[7*8+5]==emptyField)
+        if(board[7*8+6]==emptyField)
+          if(board[7*8+7]==whiteRook)
+            return true;
+
+  if(move[1][0]==0&&move[1][1]==6)   //Check small Castling (rochade) move black
+    if(board[move[0][0]*8+move[0][1]]==blackKing)
+      if(board[0*8+5]==emptyField)
+        if(board[0*8+6]==emptyField)
+          if(board[0*8+7]==blackRook)
+              return true;
+  return false;
+}
+
+
 function makeCastlingMove(move, player) {
   var move2=[];
   if(move[FROM][0]==7 && move[FROM][1]==4 && move[TO][0]==7 && move[TO][1]==6)
   {
     move2=[[7,7],[7,5]];
-    board[move2[1][0]*8+move2[1][1]]=board[move2[0][0]*8+move2[0][1]];
-    board[move2[0][0]*8+move2[0][1]]=0;
-    return [ move2, 0, board[move2[0][0]*8+move2[0][1]], emptyField ];
+    board[move2[TO][0]*8+move2[TO][1]]=board[move2[FROM][0]*8+move2[FROM][1]];
+    board[move2[FROM][0]*8+move2[FROM][1]]=0;
+    return [ move2, board[move2[FROM][0]*8+move2[FROM][1]], board[move2[TO][0]*8+move2[TO][1]] ];
   }
 
   if(move[FROM][0]==0 && move[FROM][1]==4 && move[TO][0]==0 && move[TO][1]==6)
   {
     move2=[[0,7],[0,5]];
-    board[move2[1][0]*8+move2[1][1]]=board[move2[0][0]*8+move2[0][1]];
-    board[move2[0][0]*8+move2[0][1]]=0;
+    board[move2[TO][0]*8+move2[TO][1]]=board[move2[FROM][0]*8+move2[FROM][1]];
+    board[move2[FROM][0]*8+move2[FROM][1]]=0;
 
-    return [ move2, 0, board[move2[0][0]*8+move2[0][1]], emptyField ];
+    return [ move2, board[move2[TO][0]*8+move2[TO][1]], board[move2[FROM][0]*8+move2[FROM][1]] ];
   }
 }
 
 
+
+
+
+
+
+
+
 function pawnPromotion(move, player) {
   if(player==1)
-    if(board[move[0][0]*8+move[0][1]]==whitePawn)
-      if(move[1][0]==0)
-        return [move, ]
+    if(board[move[FROM][0]*8+move[FROM][1]]==whitePawn)
+      if(move[TO][0]==0)
+        return [move, board[move[FROM][0]*8+move[FROM][1]], board[move[TO][0]*8+move[TO][1]]]
 }
-
 

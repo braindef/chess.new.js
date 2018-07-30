@@ -132,7 +132,7 @@ function commitMove(move, player) {
   if(player==-1) king=blackKing;
   
   var savedData = [];
-  //var rollbackFigure1 = board[move[TO][X]*8+move[TO][Y]];   
+
   savedData.push([move, board[move[FROM][X]*8+move[FROM][Y]], board[move[TO][X]*8+move[TO][Y]] ]);
   
   if(board[move[FROM][X]*8+move[FROM][Y]]==king)
@@ -148,14 +148,14 @@ function commitMove(move, player) {
 
 function revertMove(savedData)
 {
-
+  //console.log("REVERT: "+savedData);
   for(var i=0; i<savedData.length; i++)
   {
-    if(i==1 && savedData[i]!=undefined) console.log("REVERT SECOND MOVE: "+i +" "+savedData[i]);
+    if(i==1 && savedData[i]!=undefined) console.log("REVERT SECOND MOVE: "+i +" "+savedData);
     if(savedData[i]==undefined) return false;
-    console.log("savedData: "+savedData[i]);
+    //console.log("savedData: "+savedData[i]);
     board[savedData[i][0][FROM][X]*8+savedData[i][0][FROM][Y]] = savedData[i][1];
-    board[savedData[i][0][TO][X]*8+savedData[i][0][TO][Y]] = savedData[i][2];
+    board[savedData[i][0][TO][X]*8+savedData[i][0][TO][Y]] = savedData[i][2]; 
   }
 }
 
