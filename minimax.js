@@ -157,7 +157,6 @@ function revertMove(savedData)
 {
   for(var i=0; i<savedData.length; i++)
   {
-    if(i==1 && savedData[i]!=undefined) console.log("REVERT SECOND MOVE: "+i +" "+savedData);
     if(savedData[i]==undefined) return false;
     board[savedData[i][0][FROM][X]*8+savedData[i][0][FROM][Y]] = savedData[i][1];
     board[savedData[i][0][TO][X]*8+savedData[i][0][TO][Y]] = savedData[i][2]; 
