@@ -278,14 +278,11 @@ function makeCastlingMove(move, player) {
 
 
 function pawnPromotion(move, player) {
-  console.log("pawnPromotion: "+ move + " P: "+player);
   if(player==1)
     if(board[move[TO][0]*8+move[TO][1]]==whitePawn)
     {
-      console.log("CHECKPOINT");
       if(move[TO][0]==0)
       {
-        console.log("Exchanging to white Queen");
         board[move[TO][0]*8+move[TO][1]]=whiteQueen;
         return [move, board[move[FROM][0]*8+move[FROM][1]], board[move[TO][0]*8+move[TO][1]]]
       }
@@ -294,10 +291,8 @@ function pawnPromotion(move, player) {
   if(player==-1)
     if(board[move[TO][0]*8+move[TO][1]]==blackPawn)
     {
-      console.log("CHECKPOINT");
       if(move[TO][0]==7)
       {
-        console.log("Exchanging to black Queen");
         board[move[TO][0]*8+move[TO][1]]=blackQueen;
         return [move, board[move[FROM][0]*8+move[FROM][1]], board[move[TO][0]*8+move[TO][1]]]
       }

@@ -144,25 +144,21 @@ function commitMove(move, player) {
   }
 
   board[move[TO][X]*8+move[TO][Y]] = board[move[FROM][X]*8+move[FROM][Y]];
-  board[move[FROM][X]*8+move[FROM][Y]] = "";
+  board[move[FROM][X]*8+move[FROM][Y]] = 0;
 
   if(board[move[FROM][X]*8+move[FROM][Y]]==pawn)
   {
       savedData.push( pawnPromotion(move, player) );
   }
-
-
   return savedData;
 }
 
 function revertMove(savedData)
 {
-  //console.log("REVERT: "+savedData);
   for(var i=0; i<savedData.length; i++)
   {
     if(i==1 && savedData[i]!=undefined) console.log("REVERT SECOND MOVE: "+i +" "+savedData);
     if(savedData[i]==undefined) return false;
-    //console.log("savedData: "+savedData[i]);
     board[savedData[i][0][FROM][X]*8+savedData[i][0][FROM][Y]] = savedData[i][1];
     board[savedData[i][0][TO][X]*8+savedData[i][0][TO][Y]] = savedData[i][2]; 
   }
