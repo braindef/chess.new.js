@@ -131,17 +131,26 @@ function commitMove(move, player) {
   if(player==1) king=whiteKing;
   if(player==-1) king=blackKing;
   
+  if(player==1) pawn=whitePawn;
+  if(player==-1) pawn=blackPawn;
+  
   var savedData = [];
 
   savedData.push([move, board[move[FROM][X]*8+move[FROM][Y]], board[move[TO][X]*8+move[TO][Y]] ]);
   
   if(board[move[FROM][X]*8+move[FROM][Y]]==king)
   {
-      savedData.push(makeCastlingMove(move, player, false));
+      savedData.push( makeCastlingMove(move, player, false) );
   }
 
   board[move[TO][X]*8+move[TO][Y]] = board[move[FROM][X]*8+move[FROM][Y]];
   board[move[FROM][X]*8+move[FROM][Y]] = "";
+
+  if(board[move[FROM][X]*8+move[FROM][Y]]==pawn)
+  {
+      savedData.push( pawnPromotion(move, player) );
+  }
+
 
   return savedData;
 }

@@ -234,6 +234,7 @@ function postMoveProcessing(move, player)
 {
   console.log("postMoveProcessing: "+move +" p: "+player);
   makeCastlingMove(move, player);
+  pawnPromotion(move, player);
 }
 
 
@@ -262,7 +263,7 @@ function makeCastlingMove(move, player) {
     move2=[[7,7],[7,5]];
     board[move2[TO][0]*8+move2[TO][1]]=board[move2[FROM][0]*8+move2[FROM][1]];
     board[move2[FROM][0]*8+move2[FROM][1]]=0;
-    return [ move2, board[move2[FROM][0]*8+move2[FROM][1]], board[move2[TO][0]*8+move2[TO][1]] ];
+    return [ move2, board[move2[TO][0]*8+move2[TO][1]], board[move2[FROM][0]*8+move2[FROM][1]] ]; //here TO and From is exchanged because the move was already done
   }
 
   if(move[FROM][0]==0 && move[FROM][1]==4 && move[TO][0]==0 && move[TO][1]==6)
@@ -271,22 +272,35 @@ function makeCastlingMove(move, player) {
     board[move2[TO][0]*8+move2[TO][1]]=board[move2[FROM][0]*8+move2[FROM][1]];
     board[move2[FROM][0]*8+move2[FROM][1]]=0;
 
-    return [ move2, board[move2[TO][0]*8+move2[TO][1]], board[move2[FROM][0]*8+move2[FROM][1]] ];
+    return [ move2, board[move2[TO][0]*8+move2[TO][1]], board[move2[FROM][0]*8+move2[FROM][1]] ];  //here TO and From is exchanged because the move was already done
   }
 }
 
 
-
-
-
-
-
-
-
 function pawnPromotion(move, player) {
+  console.log("pawnPromotion: "+ move + " P: "+player);
   if(player==1)
-    if(board[move[FROM][0]*8+move[FROM][1]]==whitePawn)
+    if(board[move[TO][0]*8+move[TO][1]]==whitePawn)
+    {
+      console.log("CHECKPOINT");
       if(move[TO][0]==0)
+      {
+        console.log("Exchanging to white Queen");
+        board[move[TO][0]*8+move[TO][1]]=whiteQueen;
         return [move, board[move[FROM][0]*8+move[FROM][1]], board[move[TO][0]*8+move[TO][1]]]
+      }
+    }
+
+  if(player==-1)
+    if(board[move[TO][0]*8+move[TO][1]]==blackPawn)
+    {
+      console.log("CHECKPOINT");
+      if(move[TO][0]==7)
+      {
+        console.log("Exchanging to black Queen");
+        board[move[TO][0]*8+move[TO][1]]=blackQueen;
+        return [move, board[move[FROM][0]*8+move[FROM][1]], board[move[TO][0]*8+move[TO][1]]]
+      }
+    }
 }
 
