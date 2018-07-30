@@ -82,17 +82,14 @@ function minimax(depth, player, init, resetCounter)
   {
 
     //Make the move  TODO: replace with commitMove(FROM, TO, MANUAL):returns savedata
-    var rollback = board[moves[i][TO][X]*8+moves[i][TO][Y]];
-    board[moves[i][TO][X]*8+moves[i][TO][Y]] = board[moves[i][FROM][X]*8+moves[i][FROM][Y]];
-    board[moves[i][FROM][X]*8+moves[i][FROM][Y]] = "";
+    var savedData = commitMove(moves[i], player);
 
     if(init)
     {
       if(isInCheck(player))
       {
         //Revert the move: replace with revertMove(savedata)
-        board[moves[i][FROM][X]*8+moves[i][FROM][Y]] = board[moves[i][TO][X]*8+moves[i][TO][Y]];
-        board[moves[i][TO][X]*8+moves[i][TO][Y]] = rollback;
+        revertMove(savedData);
         continue;    
       }
     }
@@ -115,8 +112,7 @@ function minimax(depth, player, init, resetCounter)
     }
 
     //Revert the move replace with commitMove(FROM, TO, MANUAL):returns savedata
-    board[moves[i][FROM][X]*8+moves[i][FROM][Y]] = board[moves[i][TO][X]*8+moves[i][TO][Y]];
-    board[moves[i][TO][X]*8+moves[i][TO][Y]] = rollback;
+    revertMove(savedData);
   }
 
   //we return the points except the first move we return the move to play    
@@ -130,4 +126,24 @@ function minimax(depth, player, init, resetCounter)
 }
 
 
+function commitMove(move, player) {
+    var rollbackFigure1 = board[move[TO][X]*8+move[TO][Y]];
+    board[move[TO][X]*8+move[TO][Y]] = board[move[FROM][X]*8+move[FROM][Y]];
+    board[move[FROM][X]*8+move[FROM][Y]] = "";
+
+    var savedData = [];
+    savedData.push([move, rollbackFigure1]);
+    //savedData.push([additionalMove, ""]);  //save second move
+    console.log(savedData);
+  return savedData;
+}
+
+function revertMove(savedData)
+{
+  for(var i=0; i<savedData.length; i++)
+  {
+    board[savedData[i][0][FROM][X]*8+savedData[i][0][FROM][Y]] = board[savedData[i][0][TO][X]*8+savedData[i][0][TO][Y]];
+    board[savedData[i][0][TO][X]*8+savedData[i][0][TO][Y]] = savedData[i][1];
+  }
+}
 
