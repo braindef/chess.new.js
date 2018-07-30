@@ -127,22 +127,32 @@ function minimax(depth, player, init, resetCounter)
 
 
 function commitMove(move, player) {
-    var rollbackFigure1 = board[move[TO][X]*8+move[TO][Y]];
-    board[move[TO][X]*8+move[TO][Y]] = board[move[FROM][X]*8+move[FROM][Y]];
-    board[move[FROM][X]*8+move[FROM][Y]] = "";
+  var king=0;
+  if(player==1) king=whiteKing;
+  if(player==-1) king=blackKing;
+  
+  var savedData = [];
+  var rollbackFigure1 = board[move[TO][X]*8+move[TO][Y]];   
+  savedData.push([move, rollbackFigure1]);
+  
+  if(board[move[FROM][X]*8+move[FROM][Y]]==king)
+  {
+      savedData.push(makeCastlingMove(move, player, false));
+  }
 
-    var savedData = [];
-    savedData.push([move, rollbackFigure1]);
-    enhancedMove(move, player);
-    //savedData.push([additionalMove, ""]);  //save second move
-    //console.log(savedData);
+  board[move[TO][X]*8+move[TO][Y]] = board[move[FROM][X]*8+move[FROM][Y]];
+  board[move[FROM][X]*8+move[FROM][Y]] = "";
+
   return savedData;
 }
 
 function revertMove(savedData)
 {
+
   for(var i=0; i<savedData.length; i++)
   {
+    if(i==1 && savedData[i]!=undefined) console.log("REVERT SECOND MOVE: "+i +" "+savedData[i]);
+    if(savedData[i]==undefined) return false;
     board[savedData[i][0][FROM][X]*8+savedData[i][0][FROM][Y]] = board[savedData[i][0][TO][X]*8+savedData[i][0][TO][Y]];
     board[savedData[i][0][TO][X]*8+savedData[i][0][TO][Y]] = savedData[i][1];
   }

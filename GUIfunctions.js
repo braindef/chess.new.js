@@ -162,6 +162,7 @@ function registerMouselistener() {
           //TODO: replace with commitMove(FROM, TO, MANUAL=true):returns savedata
           board[secondSelected[0]*8+secondSelected[1]]=board[firstSelected[0]*8+firstSelected[1]];
           board[firstSelected[0]*8+firstSelected[1]]=0;
+          postMoveProcessing([firstSelected, secondSelected], 1);
 
           if(isInCheck(1))
           {

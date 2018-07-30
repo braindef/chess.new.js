@@ -206,24 +206,63 @@ function checkKing(from, to, player) {
         stepsVertical==0 && stepsHorizontal==1 ||
         stepsVertical==1 && stepsHorizontal==0    ) && board[to[0]*8+to[1]]*player<=0 )
     return true;
-    
+
+
+  return castlingMovePossible([from, to], player);
+}
+
+
+
+function castlingMovePossible(move, player) {
+  if(move[1][0]==7&&move[1][1]==6)   //Check small Castling (rochade) move white
+    if(board[move[0][0]*8+move[0][1]]==whiteKing)
+      if(board[7*8+5]==emptyField)
+        if(board[7*8+6]==emptyField)
+          if(board[7*8+7]==whiteRook)
+            return true;
+
+  if(move[1][0]==0&&move[1][1]==6)   //Check small Castling (rochade) move black
+    if(board[move[0][0]*8+move[0][1]]==blackKing)
+      if(board[0*8+5]==emptyField)
+        if(board[0*8+6]==emptyField)
+          if(board[0*8+7]==blackRook)
+              return true;
   return false;
 }
 
+function postMoveProcessing(move, player)
+{
+  console.log("postMoveProcessing: "+move +" p: "+player);
+  makeCastlingMove(move, player);
+}
 
-function enhancedMove(move, player) {
- /* //the figure is already moved, so we have to check figure at move[TO]
-  if(move[1][0]==7&&move[1][1]=6)   //Check Rochade move white
-    if(board[move[1][0]*8+move[1][1]]==
-  
-  //pawn promotion
-  
-  var rollback=[];
-  rollback.push();
-  
-  return rollback;*/
+function makeCastlingMove(move, player) {
+  var move2=[];
+  if(move[FROM][0]==7 && move[FROM][1]==4 && move[TO][0]==7 && move[TO][1]==6)
+  {
+    move2=[[7,7],[7,5]];
+    board[move2[1][0]*8+move2[1][1]]=board[move2[0][0]*8+move2[0][1]];
+    board[move2[0][0]*8+move2[0][1]]=0;
+    console.log("RETURN WHITE ROOK old POS");
+    return [ move2, board[move2[1][0]*8+move2[1][1]] ];
+  }
+
+  if(move[FROM][0]==0 && move[FROM][1]==4 && move[TO][0]==0 && move[TO][1]==6)
+  {
+    console.log("making black castling");
+    move2=[[0,7],[0,5]];
+    board[move2[1][0]*8+move2[1][1]]=board[move2[0][0]*8+move2[0][1]];
+    board[move2[0][0]*8+move2[0][1]]=0;
+    
+    console.log([ move2, board[move2[1][0]*8+move2[1][1]] ]);
+    console.log("RETURN BLACK ROOK old POS");
+    return [ move2, board[move2[1][0]*8+move2[1][1]] ];
+  }
 }
 
 
+function pawnPromotion(move, player) {
+
+}
 
 
