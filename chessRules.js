@@ -243,23 +243,25 @@ function makeCastlingMove(move, player) {
     move2=[[7,7],[7,5]];
     board[move2[1][0]*8+move2[1][1]]=board[move2[0][0]*8+move2[0][1]];
     board[move2[0][0]*8+move2[0][1]]=0;
-    return [ move2, 0 ];
+    return [ move2, 0, board[move2[0][0]*8+move2[0][1]], emptyField ];
   }
 
   if(move[FROM][0]==0 && move[FROM][1]==4 && move[TO][0]==0 && move[TO][1]==6)
   {
-    console.log("making black castling");
     move2=[[0,7],[0,5]];
     board[move2[1][0]*8+move2[1][1]]=board[move2[0][0]*8+move2[0][1]];
     board[move2[0][0]*8+move2[0][1]]=0;
 
-    return [ move2, 0 ];
+    return [ move2, 0, board[move2[0][0]*8+move2[0][1]], emptyField ];
   }
 }
 
 
 function pawnPromotion(move, player) {
-
+  if(player==1)
+    if(board[move[0][0]*8+move[0][1]]==whitePawn)
+      if(move[1][0]==0)
+        return [move, ]
 }
 
 
