@@ -1,5 +1,23 @@
-var cols=8;
-var rows=8;
+const cols=8;
+const rows=8;
+
+const emptyField =   0;
+
+const whitePawn =    1;
+const whiteBishop =  5;
+const whiteKnight =  7;
+const whiteRook =   10;
+const whiteQueen =  30;
+const whiteKing =  100;
+
+const blackPawn =   -1;
+const blackBishop = -5;
+const blackKnight = -7;
+const blackRook =  -10;
+const blackQueen = -30;
+const blackKing = -100;
+
+
 
 var board = new Int8Array(cols*rows);
 
@@ -20,40 +38,40 @@ function checking(from, to, player)
 
   switch (board[from[0]*8+from[1]]) {
   
-    case 1:
+    case whitePawn:
       return checkPawn(from, to, player);
       
-    case -1:
+    case blackPawn:
       return checkPawn(from, to, player);
   
-    case 7:
+    case whiteKnight:
       return checkKnight(from, to, player);
-      
-    case -7:
+
+    case blackKnight:
       return checkKnight(from, to, player);
   
-    case 5:
+    case whiteBishop:
       return checkBishop(from, to, player);
       
-    case -5:
+    case blackBishop:
       return checkBishop(from, to, player);
   
-    case 10:
+    case whiteRook:
       return checkRook(from, to, player);
       
-    case -10:
+    case blackRook:
       return checkRook(from, to, player);
 
-    case 30:
+    case whiteQueen:
       return checkQueen(from, to, player);
       
-    case -30:
+    case blackQueen:
       return checkQueen(from, to, player);
 
-    case 100:
+    case whiteKing:
       return checkKing(from, to, player);
       
-    case -100:
+    case blackKing:
       return checkKing(from, to, player);
   }
 
@@ -193,7 +211,18 @@ function checkKing(from, to, player) {
 }
 
 
-
+function enhancedMove(move, player) {
+ /* //the figure is already moved, so we have to check figure at move[TO]
+  if(move[1][0]==7&&move[1][1]=6)   //Check Rochade move white
+    if(board[move[1][0]*8+move[1][1]]==
+  
+  //pawn promotion
+  
+  var rollback=[];
+  rollback.push();
+  
+  return rollback;*/
+}
 
 
 

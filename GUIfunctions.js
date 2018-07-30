@@ -55,6 +55,9 @@ function getBoardFromHTML() {
     }
 }
 
+
+
+
 function getFigureNumber(i, j) {
   figure = document.getElementById(fields[i][j]).innerHTML;
   
@@ -62,19 +65,19 @@ function getFigureNumber(i, j) {
 
     case "": return 0;
   
-    case "♙": return 1;
-    case "♗": return 5;
-    case "♘": return 7;
-    case "♖": return 10;
-    case "♕": return 30;
-    case "♔": return 100;
+    case "♙": return whitePawn;
+    case "♗": return whiteBishop;
+    case "♘": return whiteKnight;
+    case "♖": return whiteRook;
+    case "♕": return whiteQueen;
+    case "♔": return whiteKing;
       
-    case "♟": return -1;
-    case "♝": return -5;
-    case "♞": return -7;
-    case "♜": return -10;
-    case "♛": return -30;
-    case "♚": return -100;
+    case "♟": return blackPawn;
+    case "♝": return blackBishop;
+    case "♞": return blackKnight;
+    case "♜": return blackRook;
+    case "♛": return blackQueen;
+    case "♚": return blackKing;
   }
   return 0;
 }
@@ -85,23 +88,25 @@ function getFigureFromNumber(i, j) {
 
     case    0: return "";
   
-    case    1: return "♙";
-    case    5: return "♗";
-    case    7: return "♘";
-    case   10: return "♖";
-    case   30: return "♕";
-    case  100: return "♔";
+    case   whitePawn: return "♙";
+    case whiteBishop: return "♗";
+    case whiteKnight: return "♘";
+    case   whiteRook: return "♖";
+    case  whiteQueen: return "♕";
+    case   whiteKing: return "♔";
       
-    case   -1: return "♟";
-    case   -5: return "♝";
-    case   -7: return "♞";
-    case  -10: return "♜";
-    case  -30: return "♛";
-    case -100: return "♚";
+    case   blackPawn: return "♟";
+    case blackBishop: return "♝";
+    case blackKnight: return "♞";
+    case   blackRook: return "♜";
+    case  blackQueen: return "♛";
+    case   blackKing: return "♚";
     
     return "";
   }
 }
+
+
 
 function getVerticalLetter(number) {
   switch (number) {

@@ -133,8 +133,9 @@ function commitMove(move, player) {
 
     var savedData = [];
     savedData.push([move, rollbackFigure1]);
+    enhancedMove(move, player);
     //savedData.push([additionalMove, ""]);  //save second move
-    console.log(savedData);
+    //console.log(savedData);
   return savedData;
 }
 
